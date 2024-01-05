@@ -12,15 +12,15 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "repairman")
+@Table(name = "employee")
 public class Employee extends BaseEntity {
 
     @NotBlank
     String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "companyID")
-    private Company company;
+    @JoinColumn(name = "officeID")
+    private Office office;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
     private List<Shipment> shipments;

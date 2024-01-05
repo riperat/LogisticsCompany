@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+//TODO Finish and fix this class
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(

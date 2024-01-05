@@ -17,6 +17,9 @@ import java.util.Set;
 public class Shipment extends BaseEntity {
 
     @NotBlank
+    private String name;
+
+    @NotBlank
     @Min(value = 1950, message = "Min 1950")
     private String weight;
 
@@ -42,8 +45,8 @@ public class Shipment extends BaseEntity {
     private Set<User> sender;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "companyID")
-    private Company company;
+    @JoinColumn(name = "officeID")
+    private Office office;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employeeID")

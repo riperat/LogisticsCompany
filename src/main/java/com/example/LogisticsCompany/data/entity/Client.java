@@ -6,13 +6,12 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "repairman")
+@Table(name = "client")
 public class Client extends BaseEntity {
 
     @NotBlank
@@ -23,6 +22,6 @@ public class Client extends BaseEntity {
     private Shipment shipment;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "companyID")
-    private Company company;
+    @JoinColumn(name = "officeID")
+    private Office office;
 }

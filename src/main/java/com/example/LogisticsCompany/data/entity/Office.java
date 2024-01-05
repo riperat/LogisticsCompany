@@ -14,19 +14,19 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "company")
-public class Company extends BaseEntity {
+@Table(name = "office")
+public class Office extends BaseEntity {
 
     private String name;
 
-    private String revenue;
+    private Double revenue;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "office")
     private List<Employee> employees;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "office")
     private List<Shipment> shipments;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "office")
     private List<Client> clients;
 }
