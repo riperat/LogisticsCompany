@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <link rel="stylesheet" href="/static/css/sidemenu.css" th:href="@{/css/sidemenu.css}">
+    <title>Shops App</title>
+</head>
+<header th:fragment="header">
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="/cars">My Cars</a>
+        <a href="/cars/create-car">Add Car</a>
+        <a href="/shops">Shops</a>
+        <a href="/shops/create-carShop">Create Shop</a>
+        <a href="/shops/adminShop-view">My Shop</a>
+        <a href="/repairmen">Repairmen</a>
+        <a href="/qual">Qualification</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <span style="font-size:30px;cursor:pointer;color:navajowhite" onclick="openNav()">&#9776;</span>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            // var div = document.getElementById("titleDiv");
+            // div.style.left = div.offsetLeft + 250 + "px";
+        }
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            // var div = document.getElementById("titleDiv");
+            // div.style.left = div.offsetLeft - 260 + "px";
+        }
+    </script>
+</header>
+</html>

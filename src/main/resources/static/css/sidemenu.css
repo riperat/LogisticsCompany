@@ -1,0 +1,210 @@
+.standart {
+    font-family: "Lato", sans-serif;
+    background-color: #262626;
+}
+
+.def-text {
+    color: white;
+}
+
+.table-template button {
+    background-color: #d2902a;
+    color: #ffffff;
+    padding: 11px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 5px 30px;
+    cursor: pointer;
+}
+
+.form-group {
+    font-weight: bold;
+    padding: 1px 1px 1px 30px;
+    text-decoration: none;
+    font-size: 25px;
+    display: block;
+
+}
+
+.button:hover {
+    background-color: #d6b076;
+}
+
+.button a{
+    background-color: #d2902a;
+    color: #ffffff;
+    padding: 11px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 5px 30px;
+    cursor: pointer;
+}
+.button {
+    background-color: #d2902a;
+    color: #ffffff;
+    padding: 11px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 5px 30px;
+    cursor: pointer;
+}
+
+.table-template {
+    width: 100%;
+    font-size: 18px;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.table-template thead tr {
+    text-align: left;
+}
+
+.table-template th,
+.table-template td {
+    font-size: 1.3em;
+    line-height: calc(1ex / 0.38);
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin: calc(1ex / 0.38) 0;
+    padding: 12px 15px;
+}
+
+.table-template tbody tr.active-row {
+    font-weight: bold;
+}
+
+.table-template thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+.table-template th,
+.table-template tbody tr:nth-of-type(odd) {
+    background-color: #a29582;
+}
+
+
+.table-template td {
+    padding: 12px 15px;
+}
+
+.table-template tbody tr:nth-of-type(even),
+.form-group {
+    background-color: #d2902a;
+}
+
+.table-template tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+
+.table-template tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+.linkB a {
+    text-decoration: none;
+    font-size: 25px;
+    color: #444343;
+    display: block;
+    transition: 0.3s;
+}
+
+.linkB a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #d2902a;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+#titleDiv {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    left: 50%;
+    transition: 0.5s;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+#myInput {
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    width: 10%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+}
+
+#myTable {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ddd;
+    font-size: 18px;
+}
+
+#myTable th, #myTable td {
+    text-align: left;
+    padding: 12px;
+}
+
+#myTable tr {
+    border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+    background-color: #f1f1f1;
+}
