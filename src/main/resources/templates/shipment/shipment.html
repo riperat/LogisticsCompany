@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head">
+<body class="standart">
+<header th:replace="fragments :: header"></header>
+<h2 class="def-text">My shipments:</h2>
+<div class="col-6">
+    <h3 class="def-text" th:unless="${shipments} and ${shipments.size()}">There are no shipments!</h3>
+    <table th:if="${shipments.size()>0}" class="table-template">
+        <th>office</th>
+        <th>name</th>
+        <th>weight</th>
+        <th>price</th>
+        <th>deliveryAddress</th>
+        <th>sender</th>
+        <th>recipient</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <tr th:each="shipment : ${shipments}">
+            <td th:text="${shipment.office}"></td>
+            <td th:text="${shipment.name}"></td>
+            <td th:text="${shipment.weight}"></td>
+            <td th:text="${shipment.price}"></td>
+            <td th:text="${shipment.deliveryAddress}"></td>
+            <td th:text="${shipment.sender}"></td>
+            <td th:text="${shipment.recipient}"></td>
+            <td><a class="btn btn-info" th:href="@{'/shipments/shipment-history/'+${shipment.id}}">Repair History</a></td>
+            <td><a class="btn btn-info" th:href="@{'/shipments/edit-shipment/'+${shipment.id}}">Edit</a></td>
+            <td><a class="btn btn-danger" th:href="@{'/shipments/delete/'+${shipment.id}}">Delete</a></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,4 +21,7 @@ public class Client extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "officeID")
     private Office office;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
+    private List<Shipment> shipments;
 }
