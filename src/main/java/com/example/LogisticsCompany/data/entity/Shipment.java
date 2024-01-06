@@ -7,7 +7,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import java.util.Set;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Getter
 @Setter
@@ -16,26 +17,19 @@ import java.util.Set;
 @Table(name = "shipment")
 public class Shipment extends BaseEntity {
 
-    @NotBlank
+    @NotBlank(message = "Name cannot be blank")
+    @Size(min = 2, message = "Name should have at least 2 characters")
     private String name;
 
-    @NotBlank
-    @Min(value = 1950, message = "Min 1950")
-    private String weight;
+    private Long weight;
 
-    @NotBlank
-    private String price;
+    private Long price;
 
     @NotBlank
     private String deliveryAddress;
 
-    @NotBlank
-    private boolean isDeliveredToOffice;
-
-    @NotBlank
     private boolean isReceived;
 
-    @NotBlank
     private boolean isSend;
 
     @NotBlank

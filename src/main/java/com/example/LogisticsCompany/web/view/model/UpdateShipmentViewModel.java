@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 
@@ -14,13 +16,24 @@ import java.util.Set;
 @NoArgsConstructor
 @ToString
 public class UpdateShipmentViewModel {
+    @NotBlank(message = "Name cannot be blank")
+    @Size(min = 2, message = "Name should have at least 2 characters")
     private String name;
-    private String weight;
-    private String price;
+
+    private Long weight;
+
+    private Long price;
+
+    @NotBlank
     private String deliveryAddress;
-    private boolean isDeliveredToOffice;
+
     private boolean isReceived;
+
     private boolean isSend;
-    private Set<User> recipient;
-    private Set<User> sender;
+
+    @NotBlank
+    private String recipient;
+
+    @NotBlank
+    private String sender;
 }

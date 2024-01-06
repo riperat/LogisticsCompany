@@ -15,12 +15,11 @@ import java.util.Set;
 @ToString
 public class CreateShipmentDTO {
     private String name;
-    private String weight;
-    private String price;
+    private Long weight;
+    private Long price;
     private String deliveryAddress;
-    private boolean isDeliveredToOffice;
     private boolean isReceived;
     private boolean isSend;
-    private Set<User> recipient;
-    private Set<User> sender;
+    private String recipient;
+    private String sender;
 }

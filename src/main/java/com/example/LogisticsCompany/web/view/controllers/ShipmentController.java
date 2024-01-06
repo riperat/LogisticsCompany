@@ -39,46 +39,44 @@ public class ShipmentController {
     }
 
     @GetMapping("/create-shipment")
-    public String showCreateCarsForm(Model model) {
-        model.addAttribute("shipment", new CreateShipmentViewModel());
-        return "/cars/create-shipment";
+    public String showCreateShipmentForm(Model model) {
+        model.addAttribute("shipments", new CreateShipmentViewModel());
+        return "/shipment/create-shipment";
     }
 
     @PostMapping("/create")
-    public String createCars(@Valid @ModelAttribute("shipment") CreateShipmentViewModel shipment, BindingResult bindingResult, @AuthenticationPrincipal User user) {
+    public String createShipment(@Valid @ModelAttribute("shipments") CreateShipmentViewModel shipment, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return "/cars/create-shipment";
+            return "/shipment/create-shipment";
         }
-        shipment.setSender(Set.of(user));
+
         shipmentService.createShipment(modelMapper.map(shipment, CreateShipmentDTO.class));
-        return "redirect:/Shipment";
+        return "redirect:/shipment";
     }
 
     @GetMapping("/edit-shipment/{id}")
-    public String showEditCarsForm(Model model, @PathVariable Long id) {
-//        model.addAttribute("shipment", shipmentService.getCar(id));
-        return "/cars/edit-shipment";
+    public String showEditShipmentForm(Model model, @PathVariable Long id) {
+        model.addAttribute("shipment", shipmentService.getShipmentById(id));
+        return "/shipment/edit-shipment";
     }
 
     @PostMapping("/update/{id}")
     public String updateShipment(@PathVariable long id, @AuthenticationPrincipal User user, @Valid @ModelAttribute("shipment") UpdateShipmentViewModel shipment, BindingResult bindingResult) {
 
-
         if (bindingResult.hasErrors()) {
-            return "/cars/edit-shipment";
+            return "/shipment/edit-shipment";
         }
-        //for some reason cars cannot be upgraded so delete and create new shipment with same id
+//        //for some reason shipment cannot be upgraded so delete and create new shipment with same id
         shipmentService.deleteShipment(id);
 
-        shipment.setSender(Set.of(user));
         shipmentService.createShipment(modelMapper.map(shipment, CreateShipmentDTO.class));
-        return "redirect:/cars";
+        return "redirect:/shipment";
     }
 
     @GetMapping("/delete/{id}")
     public String processProgramForm(@PathVariable int id) {
         shipmentService.deleteShipment(id);
-        return "redirect:/cars";
+        return "redirect:/shipment";
     }
 }

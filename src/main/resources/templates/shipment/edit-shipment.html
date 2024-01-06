@@ -4,47 +4,50 @@
 <body class="standart">
 <header th:replace="fragments :: header"></header>
 <div class="col-6">
-    <h2 class="def-text">Edit car:</h2>
-    <form action="#" th:action="@{/cars/update/{id}(id=${id})}" th:object="${car}" method="post">
+    <h2 class="def-text">Edit Shipment:</h2>
+    <form action="#" th:action="@{/shipment/update/{id}(id=${id})}" th:object="${shipment}" method="post">
         <div class="form-group">
             <div class="form-group">
-                <label>Brand: </label>
-                <input class="form-control" type="text" th:field="*{brand}" placeholder="Brand" id="brand">
-                <span class="text-danger" th:if="${#fields.hasErrors('brand')}"
-                      th:errors="*{brand}">Cannot be left blank</span>
+                <label>Name: </label>
+                <input class="form-control" type="text" th:field="*{name}" placeholder="Name" id="Name">
+                <span class="text-danger" th:if="${#fields.hasErrors('name')}"
+                      th:errors="*{name}">Cannot be left blank</span>
             </div>
 
             <div class="form-group">
-                <label>Model: </label>
-                <input class="form-control" type="text" th:field="*{model}" placeholder="Model" id="model">
-                <span class="text-danger" th:if="${#fields.hasErrors('model')}"
-                      th:errors="*{model}">Cannot be left blank</span>
+                <label>Weight: </label>
+                <input class="form-control" type="number" th:field="*{weight}" placeholder="Weight" id="weight">
+                <span class="text-danger" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}">Minimum weight should be 1950</span>
             </div>
 
             <div class="form-group">
-                <label>Color: </label>
-                <input class="form-control" type="text" th:field="*{color}" placeholder="Color" id="color">
-                <span class="text-danger" th:if="${#fields.hasErrors('color')}"
-                      th:errors="*{color}">Cannot be left blank</span>
+                <label>Price: </label>
+                <input class="form-control" type="number" th:field="*{price}" placeholder="Price" id="price">
+                <span class="text-danger" th:if="${#fields.hasErrors('price')}"
+                      th:errors="*{price}">Price is required</span>
             </div>
 
             <div class="form-group">
-                <label>Registration Number: </label>
-                <input class="form-control" type="text" th:field="*{registrationNumber}"
-                       placeholder="Registration Number"
-                       id="registrationNumber">
-                <span class="text-danger" th:if="${#fields.hasErrors('registrationNumber')}"
-                      th:errors="*{registrationNumber}">Cannot be left blank</span>
+                <label>Delivery Address: </label>
+                <input class="form-control" type="text" th:field="*{deliveryAddress}" placeholder="Delivery Address"
+                       id="deliveryAddress">
+                <span class="text-danger" th:if="${#fields.hasErrors('deliveryAddress')}"
+                      th:errors="*{deliveryAddress}">Cannot be left blank</span>
             </div>
 
             <div class="form-group">
-                <label>Manufacture Year: </label>
-                <input class="form-control" type="text" th:field="*{manufactureYear}"
-                       placeholder="Manufacture Year"
-                       id="manufactureYear">
-                <span class="text-danger" th:if="${#fields.hasErrors('manufactureYear')}"
-                      th:errors="*{manufactureYear}">Manufacture Year Error</span>
+                <label>Recipient: </label>
+                <input class="form-control" type="text" th:field="*{recipient}" placeholder="Recipient"
+                       id="recipient">
+                <span class="text-danger" th:if="${#fields.hasErrors('recipient')}" th:errors="*{recipient}">Cannot be left blank</span>
             </div>
+
+            <div class="form-group">
+                <label>Sender: </label>
+                <input class="form-control" type="text" th:field="*{sender}" placeholder="Sender" id="sender">
+                <span class="text-danger" th:if="${#fields.hasErrors('sender')}" th:errors="*{sender}">Cannot be left blank</span>
+            </div>
+
         </div>
         <button type="submit" class="button">Submit</button>
     </form>
