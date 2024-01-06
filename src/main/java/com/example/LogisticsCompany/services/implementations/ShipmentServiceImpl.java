@@ -49,8 +49,8 @@ public class ShipmentServiceImpl implements ShipmentService {
     }
 
     @Override
-    public List<Shipment> findAllByReceivedStatus(boolean isReceived) {
-        return shipmentRepository.findAllByReceivedStatus(isReceived);
+    public List<Shipment> findAllByIsReceived(boolean isReceived) {
+        return shipmentRepository.findAllByIsReceived(isReceived);
     }
 
     @Override
@@ -59,12 +59,12 @@ public class ShipmentServiceImpl implements ShipmentService {
     }
 
     @Override
-    public List<Shipment> findAllSentByClient(Client client) {
-        return shipmentRepository.findAllSentByClient(client);
+    public List<Shipment> findAllSentBySender(String sender) {
+        return shipmentRepository.findAllSentBySender(sender);
     }
 
     @Override
-    public List<Shipment> findAllReceivedByClient(Client client) {
-        return shipmentRepository.findAllReceivedByClient(client);
+    public List<Shipment> findAllReceivedByRecipient(String recipient) {
+        return shipmentRepository.findAllReceivedByRecipient(recipient);
     }
 }

@@ -1,6 +1,5 @@
 package com.example.LogisticsCompany.services.interfaces;
 
-import com.example.LogisticsCompany.data.entity.Client;
 import com.example.LogisticsCompany.data.entity.Employee;
 import com.example.LogisticsCompany.data.entity.Shipment;
 import com.example.LogisticsCompany.web.dto.CreateShipmentDTO;
@@ -20,11 +19,11 @@ public interface ShipmentService {
 
     void deleteShipment(long id);
 
-    List<Shipment> findAllByReceivedStatus(boolean isReceived);
+    List<Shipment> findAllByIsReceived(boolean isReceived);
 
     List<Shipment> findAllByEmployee(Employee employee);
 
-    List<Shipment> findAllSentByClient(Client client);
+    List<Shipment> findAllSentBySender(String sender);
 
-    List<Shipment> findAllReceivedByClient(Client client);
+    List<Shipment> findAllReceivedByRecipient(String recipient);
 }

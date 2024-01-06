@@ -38,11 +38,11 @@ public class Shipment extends BaseEntity {
     @NotBlank
     private boolean isSend;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private Set<User> recipient;
+    @NotBlank
+    private String recipient;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private Set<User> sender;
+    @NotBlank
+    private String sender;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "officeID")

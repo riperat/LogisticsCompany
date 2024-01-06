@@ -18,10 +18,6 @@ public class Client extends BaseEntity {
     String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "shipmentID")
-    private Shipment shipment;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "officeID")
     private Office office;
 }

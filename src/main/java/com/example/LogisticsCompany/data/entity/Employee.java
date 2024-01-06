@@ -25,4 +25,6 @@ public class Employee extends BaseEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
     private List<Shipment> shipments;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    private List<User> user;
 }
