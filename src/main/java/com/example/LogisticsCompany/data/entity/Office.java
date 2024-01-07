@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Getter
@@ -16,8 +17,11 @@ import java.util.List;
 @Entity
 @Table(name = "office")
 public class Office extends BaseEntity {
-
+    @NotBlank
     private String name;
+
+    @NotBlank
+    private String location;
 
     private Double revenue;
 

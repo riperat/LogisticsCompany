@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body class="standart">
+<header th:replace="fragments :: header"></header>
+<h2 class="def-text">All Offices:</h2>
+<div class="col-6">
+    <h3 class="def-text" th:unless="${offices} and ${offices.size()}">There are no offices!</h3>
+    <table th:if="${offices.size() > 0}" class="table-template">
+        <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th th:if="${isAdmin}">Revenue</th>
+            <th>Create Shipment</th>
+            <th th:if="${isAdmin}">Edit</th>
+            <th th:if="${isAdmin}">Delete</th>
+        </tr>
+        <tr th:each="office : ${offices}">
+            <td th:text="${office.name}"></td>
+            <td th:text="${office.location}"></td>
+            <td th:if="${isAdmin}" th:text="${office.revenue}"></td>
+
+            <td><a class="btn btn-info" th:href="@{'/shipment/create-shipment/'}">Create Shipment</a>
+
+            </td>
+            <td th:if="${isAdmin}">
+                <a class="btn btn-info" th:href="@{'/office/edit-office/' + ${office.id}}">Edit</a>
+            </td>
+
+            <td th:if="${isAdmin}">
+                <a class="btn btn-danger" th:href="@{'/office/delete/' + ${office.id}}">Delete</a>
+            </td>
+        </tr>
+    </table>
+    <td th:if="${isAdmin}" ><a class="button" th:href="@{'/office/create-office/'}">Create Office</a></td>
+</div>
+</body>
+</html>

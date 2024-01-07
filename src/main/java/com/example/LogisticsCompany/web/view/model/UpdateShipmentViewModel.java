@@ -1,5 +1,6 @@
 package com.example.LogisticsCompany.web.view.model;
 
+import com.example.LogisticsCompany.data.entity.Client;
 import com.example.LogisticsCompany.data.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,6 +35,4 @@ public class UpdateShipmentViewModel {
     @NotBlank
     private String recipient;
 
-    @NotBlank
-    private String sender;
-}
+    private User sender;}

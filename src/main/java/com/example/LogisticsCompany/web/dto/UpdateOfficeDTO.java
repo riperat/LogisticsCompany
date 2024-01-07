@@ -17,6 +17,7 @@ import java.util.Set;
 @ToString
 public class UpdateOfficeDTO {
     private String name;
+    private String location;
     private Double revenue;
     private Set<Employee> employees;
     private Set<Shipment> shipments;

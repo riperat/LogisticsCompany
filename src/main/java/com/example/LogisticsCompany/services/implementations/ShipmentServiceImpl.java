@@ -65,7 +65,7 @@ public class ShipmentServiceImpl implements ShipmentService {
     }
 
     @Override
-    public List<Shipment> findAllSentBySender(String sender) {
+    public List<Shipment> findAllSentBySender(User sender) {
         return shipmentRepository.findAllSentBySender(sender);
     }
 

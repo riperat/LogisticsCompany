@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 
@@ -32,6 +33,9 @@ public class User extends BaseEntity implements UserDetails {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "clientID")
     private Client client;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "sender")
+    private List<Shipment> shipments;
 
     @Override
     public boolean isAccountNonExpired() {

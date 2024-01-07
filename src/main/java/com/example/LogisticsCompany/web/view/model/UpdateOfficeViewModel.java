@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 
@@ -16,7 +17,11 @@ import java.util.Set;
 @NoArgsConstructor
 @ToString
 public class UpdateOfficeViewModel {
+    @NotBlank
     private String name;
+
+    @NotBlank
+    private String location;
     private Double revenue;
     private Set<Employee> employees;
     private Set<Shipment> shipments;

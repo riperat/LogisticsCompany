@@ -20,7 +20,7 @@
             <td th:text="${shipment.weight}"></td>
             <td th:text="${shipment.price}"></td>
             <td th:text="${shipment.deliveryAddress}"></td>
-            <td th:text="${shipment.sender}"></td>
+            <td th:text="${shipment.sender.username}"></td>
             <td th:text="${shipment.recipient}"></td>
             <td><a class="btn btn-info" th:href="@{'/shipment/edit-shipment/'+${shipment.id}}">Edit</a></td>
             <td><a class="btn btn-danger" th:href="@{'/shipment/delete/'+${shipment.id}}">Delete</a></td>

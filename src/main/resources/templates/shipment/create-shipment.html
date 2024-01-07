@@ -4,7 +4,7 @@
 <body class="standart">
 <header th:replace="fragments :: header"></header>
 <div class="col-6">
-    <h2 class="def-text">Add car:</h2>
+    <h2 class="def-text">Add Shipment:</h2>
     <form action="#" th:action="@{/shipment/create}" th:object="${shipments}" method="post">
         <div class="form-group">
             <div class="form-group">
@@ -41,13 +41,6 @@
                        id="recipient">
                 <span class="text-danger" th:if="${#fields.hasErrors('recipient')}" th:errors="*{recipient}">Cannot be left blank</span>
             </div>
-
-            <div class="form-group">
-                <label>Sender: </label>
-                <input class="form-control" type="text" th:field="*{sender}" placeholder="Sender" id="sender">
-                <span class="text-danger" th:if="${#fields.hasErrors('sender')}" th:errors="*{sender}">Cannot be left blank</span>
-            </div>
-
         </div>
         <button type="submit" class="button">Submit</button>
     </form>

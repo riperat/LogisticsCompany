@@ -1,5 +1,7 @@
 package com.example.LogisticsCompany.web.view.model;
 
+import com.example.LogisticsCompany.data.entity.Client;
+import com.example.LogisticsCompany.data.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -7,6 +9,7 @@ import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 
 @Getter
@@ -32,6 +35,5 @@ public class CreateShipmentViewModel {
     @NotBlank
     private String recipient;
 
-    @NotBlank
-    private String sender;
+    private User sender;
 }

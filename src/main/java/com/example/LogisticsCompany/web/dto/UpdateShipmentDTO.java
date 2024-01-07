@@ -1,5 +1,6 @@
 package com.example.LogisticsCompany.web.dto;
 
+import com.example.LogisticsCompany.data.entity.Client;
 import com.example.LogisticsCompany.data.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,5 +22,5 @@ public class UpdateShipmentDTO {
     private boolean isReceived;
     private boolean isSend;
     private String recipient;
-    private String sender;
+    private User sender;
 }

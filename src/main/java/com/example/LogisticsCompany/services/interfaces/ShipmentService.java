@@ -27,7 +27,7 @@ public interface ShipmentService {
 
     List<Shipment> findAllByEmployee(Employee employee);
 
-    List<Shipment> findAllSentBySender(String sender);
+    List<Shipment> findAllSentBySender(User sender);
 
     List<Shipment> findAllReceivedByRecipient(String recipient);
 }

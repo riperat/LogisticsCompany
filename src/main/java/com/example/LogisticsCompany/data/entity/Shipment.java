@@ -9,6 +9,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -35,8 +36,9 @@ public class Shipment extends BaseEntity {
     @NotBlank
     private String recipient;
 
-    @NotBlank
-    private String sender;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "userid")
+    private User sender;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "officeID")
