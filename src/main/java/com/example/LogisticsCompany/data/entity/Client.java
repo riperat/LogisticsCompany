@@ -22,10 +22,4 @@ public class Client extends BaseEntity {
     @JoinColumn(name = "officeID")
     private Office office;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "shipmentID")
-    private Shipment shipment;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
-    private List<Shipment> shipments;
 }

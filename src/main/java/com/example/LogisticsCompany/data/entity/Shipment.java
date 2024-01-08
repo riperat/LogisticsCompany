@@ -44,11 +44,4 @@ public class Shipment extends BaseEntity {
     @JoinColumn(name = "officeID")
     private Office office;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employeeID")
-    private Employee employee;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "clientID")
-    private Client client;
 }

@@ -22,9 +22,7 @@ public class Employee extends BaseEntity {
     @JoinColumn(name = "officeID")
     private Office office;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
-    private List<Shipment> shipments;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
-    private List<User> user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userID")
+    private User user;
 }

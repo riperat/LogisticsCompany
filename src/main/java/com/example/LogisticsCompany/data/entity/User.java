@@ -23,12 +23,11 @@ public class User extends BaseEntity implements UserDetails {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> authorities;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employeeID")
-    private Employee employee;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Employee> employees;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "clientID")

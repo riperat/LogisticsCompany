@@ -5,7 +5,7 @@
 <header th:replace="fragments :: header"></header>
 <div class="col-6">
     <h2 class="def-text">Edit Shipment:</h2>
-    <form action="#" th:action="@{/office/update/{id}(id=${id})}" th:object="${office}" method="post">
+    <form action="#" th:action="@{/employee/update/{id}(id=${id})}" th:object="${employee}" method="post">
         <div class="form-group">
             <div class="form-group">
                 <label>Name: </label>
@@ -14,13 +14,10 @@
                       th:errors="*{name}">Cannot be left blank</span>
             </div>
 
-            <div class="form-group">
-                <label>location: </label>
-                <input class="form-control" type="text" th:field="*{location}" placeholder="Name" id="location">
-                <span class="text-danger" th:if="${#fields.hasErrors('location')}"
-                      th:errors="*{location}">Cannot be left blank</span>
+            <div th:each="option, index : ${qualifications}">
+                <label>Select office:</label>
+                <input type="checkbox" th:value="${option}" name="qualifications" th:text="${option}" />
             </div>
-        </div>
         </div>
         <button type="submit" class="button">Submit</button>
     </form>

@@ -3,24 +3,20 @@
 <head th:replace="fragments :: head">
 <body class="standart">
 <header th:replace="fragments :: header"></header>
-
+<h2 class="def-text">Employees:</h2>
 <div class="col-6">
-    <h2 class="def-text">Employees:</h2>
     <h3 class="def-text" th:unless="${employees} and ${employees.size()}">There are no employees!</h3>
     <table th:if="${employees.size()>0}" class="table-template">
         <th>name</th>
+        <th>Edit</th>
+        <th>Delete</th>
         <tr th:each="employee : ${employees}">
-            <td th:text="${employee}"></td>
+            <td th:text="${employee.name}"></td>
+            <td><a class="btn btn-info" th:href="@{'/employee/edit-employee/'+${employee.id}}">Edit</a></td>
+            <td><a class="btn btn-danger" th:href="@{'/employee/delete/'+${employee.id}}">Delete</a></td>
         </tr>
     </table>
-    <h2 class="def-text">Users:</h2>
-    <table th:if="${users.size()>0}" class="table-template">
-        <th>name</th>
-        <tr th:each="user : ${users}">
-            <td th:text="${user}"></td>
-        </tr>
-    </table>
-
+    <td><a class="button" th:href="@{'/employee/create-employee/' + ${id}}">Register employee</a></td>
 </div>
 </body>
 </html>

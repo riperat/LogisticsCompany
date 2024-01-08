@@ -50,27 +50,7 @@ public class ShipmentServiceImpl implements ShipmentService {
     }
 
     @Override
-    public List<Shipment> findAllSentByClient(Client client) {
-        return shipmentRepository.findAllSentByClient(client);
-    }
-
-    @Override
-    public List<Shipment> findAllByIsReceived(boolean isReceived) {
-        return shipmentRepository.findAllByIsReceived(isReceived);
-    }
-
-    @Override
-    public List<Shipment> findAllByEmployee(Employee employee) {
-        return shipmentRepository.findAllByEmployee(employee);
-    }
-
-    @Override
     public List<Shipment> findAllSentBySender(User sender) {
         return shipmentRepository.findAllSentBySender(sender);
-    }
-
-    @Override
-    public List<Shipment> findAllReceivedByRecipient(String recipient) {
-        return shipmentRepository.findAllReceivedByRecipient(recipient);
     }
 }

@@ -16,7 +16,9 @@
             <th th:if="${isAdmin}">Delete</th>
         </tr>
         <tr th:each="office : ${offices}">
-            <td th:text="${office.name}"></td>
+            <td th:if="${isAdmin}">
+                <a class="btn btn-info" th:href="@{'/office/office-view/' + ${office.id}}" th:text="${office.name}"></a>
+            </td>
             <td th:text="${office.location}"></td>
             <td th:if="${isAdmin}" th:text="${office.revenue}"></td>
 

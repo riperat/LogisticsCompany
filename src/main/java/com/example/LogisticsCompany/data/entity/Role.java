@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -17,7 +18,6 @@ public class Role extends BaseEntity implements GrantedAuthority {
     @Column(nullable = false, unique = true)
     private String authority;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "clientID")
-    private User users;
+    @ManyToMany(mappedBy = "authorities", fetch = FetchType.EAGER)
+    private Set<User> user;
 }

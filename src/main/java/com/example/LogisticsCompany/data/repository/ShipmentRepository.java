@@ -10,11 +10,7 @@ import java.util.List;
 
 public interface ShipmentRepository extends JpaRepository<Shipment, Long> {
 
-    List<Shipment> findAllSentByClient(Client client);
-
     List<Shipment> findAllByIsReceived(boolean isReceived);
-
-    List<Shipment> findAllByEmployee(Employee employee);
 
     List<Shipment> findAllSentBySender(User sender);
 

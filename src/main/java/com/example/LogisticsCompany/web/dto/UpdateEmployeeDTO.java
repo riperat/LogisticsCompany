@@ -2,6 +2,7 @@ package com.example.LogisticsCompany.web.dto;
 
 import com.example.LogisticsCompany.data.entity.Client;
 import com.example.LogisticsCompany.data.entity.Employee;
+import com.example.LogisticsCompany.data.entity.Office;
 import com.example.LogisticsCompany.data.entity.Shipment;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,4 +19,5 @@ import java.util.Set;
 public class UpdateEmployeeDTO {
     private String name;
     private Set<Shipment> shipments;
+    private Office office;
 }

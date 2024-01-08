@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
 
@@ -23,6 +25,8 @@ public class Office extends BaseEntity {
     @NotBlank
     private String location;
 
+    @Min(value = 0, message = "Minimum value is 0")
+    @Max(value = 100000, message = "You corrupt pig, just make him buy a new car")
     private Double revenue;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "office")

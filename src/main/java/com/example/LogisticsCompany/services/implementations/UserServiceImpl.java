@@ -24,6 +24,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(UserDto userDto) {
+        savedUser(userDto);
+    }
+
+    @Override
+    public User savedUser(UserDto userDto) {
         User user = new User();
         user.setUsername(userDto.getUsername());
         // encrypt the password using spring security
@@ -36,6 +41,7 @@ public class UserServiceImpl implements UserService {
 
         user.setAuthorities(Set.of(role));
         userRepository.save(user);
+        return user;
     }
 
     @Override

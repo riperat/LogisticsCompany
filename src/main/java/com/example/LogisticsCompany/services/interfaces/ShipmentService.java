@@ -21,13 +21,6 @@ public interface ShipmentService {
 
     void deleteShipment(long id);
 
-    List<Shipment> findAllSentByClient(Client client);
-
-    List<Shipment> findAllByIsReceived(boolean isReceived);
-
-    List<Shipment> findAllByEmployee(Employee employee);
-
     List<Shipment> findAllSentBySender(User sender);
 
-    List<Shipment> findAllReceivedByRecipient(String recipient);
 }

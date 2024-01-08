@@ -2,6 +2,7 @@ package com.example.LogisticsCompany.web.view.controllers;
 
 import com.example.LogisticsCompany.data.entity.Office;
 import com.example.LogisticsCompany.data.entity.User;
+import com.example.LogisticsCompany.services.interfaces.EmployeeService;
 import com.example.LogisticsCompany.services.interfaces.OfficeService;
 import com.example.LogisticsCompany.web.dto.CreateOfficeDTO;
 import com.example.LogisticsCompany.web.view.model.CreateOfficeViewModel;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 
 
 @Controller
@@ -26,6 +28,7 @@ public class OfficeController {
     private final ModelMapper modelMapper;
 
     private OfficeService officeService;
+    private EmployeeService employeeService;
 
     @GetMapping
     public String getOffices(Model model, @AuthenticationPrincipal User user) {
@@ -56,6 +59,13 @@ public class OfficeController {
     public String showEditOfficeForm(Model model, @PathVariable Long id) {
         model.addAttribute("office", officeService.getOfficeById(id));
         return "/office/edit-office";
+    }
+
+    @GetMapping("/office-view/{id}")
+    public String officeView(Model model, @PathVariable Long id) {
+        model.addAttribute("employees", employeeService.getAllEmployeesByOffice(officeService.getOfficeById(id)));
+        model.addAttribute("id", id);
+        return "/office/office-view";
     }
 
     @PostMapping("/update/{id}")

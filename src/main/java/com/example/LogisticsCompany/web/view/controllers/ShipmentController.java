@@ -31,8 +31,8 @@ public class ShipmentController {
     @GetMapping
     public String getShipments(Model model, @AuthenticationPrincipal User user) {
         //gets a list of shipments either by user or all if the user is != client
-        final List<Shipment> shipments = user.getAuthorities().iterator().next().getAuthority().equals("USER") ?
-                shipmentService.findAllSentByClient(user.getClient()) : shipmentService.getAllShipments();
+        final List<Shipment> shipments = user.getAuthorities().iterator().next().getAuthority().equals("ADMIN") ?
+                 shipmentService.getAllShipments() : shipmentService.findAllSentBySender(user);
         model.addAttribute("shipments", shipments);
         return "/shipment/shipment.html";
     }
@@ -69,6 +69,7 @@ public class ShipmentController {
         }
 
         shipmentService.deleteShipment(id);
+        shipment.setSender(user);
         shipmentService.createShipment(modelMapper.map(shipment, CreateShipmentDTO.class));
         return "redirect:/shipment";
     }
