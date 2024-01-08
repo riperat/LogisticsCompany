@@ -23,18 +23,23 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public void saveUser(UserDto userDto) {
-        savedUser(userDto);
+    public User getUserById(long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
     }
 
     @Override
-    public User savedUser(UserDto userDto) {
+    public void saveUser(UserDto userDto, Role role) {
+        savedUser(userDto, role);
+    }
+
+    @Override
+    public User savedUser(UserDto userDto, Role role) {
         User user = new User();
         user.setUsername(userDto.getUsername());
         // encrypt the password using spring security
         user.setPassword(passwordEncoder.bCryptPasswordEncoder().encode(userDto.getPassword()));
 
-        Role role = roleRepository.findByAuthority("USER");
         if (role == null) {
             role = checkRoleExist();
         }
@@ -55,6 +60,11 @@ public class UserServiceImpl implements UserService {
         return users.stream()
                 .map((user) -> mapToUserDto(user))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteUser(long id) {
+        userRepository.deleteById(id);
     }
 
     private UserDto mapToUserDto(User user) {

@@ -19,12 +19,12 @@
             <td th:if="${isAdmin}">
                 <a class="btn btn-info" th:href="@{'/office/office-view/' + ${office.id}}" th:text="${office.name}"></a>
             </td>
+            <td th:if="${!isAdmin}" th:text="${office.name}"></td>
+
             <td th:text="${office.location}"></td>
             <td th:if="${isAdmin}" th:text="${office.revenue}"></td>
 
-            <td><a class="btn btn-info" th:href="@{'/shipment/create-shipment/'}">Create Shipment</a>
-
-            </td>
+            <td><a class="btn btn-info" th:href="@{'/shipment/create-shipment/' + ${office.id}}">Create Shipment</a></td>
             <td th:if="${isAdmin}">
                 <a class="btn btn-info" th:href="@{'/office/edit-office/' + ${office.id}}">Edit</a>
             </td>

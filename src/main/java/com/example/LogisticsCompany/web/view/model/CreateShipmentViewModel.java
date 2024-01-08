@@ -1,6 +1,6 @@
 package com.example.LogisticsCompany.web.view.model;
 
-import com.example.LogisticsCompany.data.entity.Client;
+import com.example.LogisticsCompany.data.entity.Office;
 import com.example.LogisticsCompany.data.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +9,7 @@ import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Set;
+import java.time.LocalDateTime;
 
 
 @Getter
@@ -36,4 +36,10 @@ public class CreateShipmentViewModel {
     private String recipient;
 
     private User sender;
+
+    private Office office;
+
+    private LocalDateTime shipmentDateTime;
+
+    private LocalDateTime receiveDateTime;
 }

@@ -5,25 +5,57 @@
 <header th:replace="fragments :: header"></header>
 <h2 class="def-text">My shipments:</h2>
 <div class="col-6">
-    <h3 class="def-text" th:unless="${shipments} and ${shipments.size()}">There are no shipments!</h3>
-    <table th:if="${shipments.size()>0}" class="table-template">
+    <h3 class="def-text">Sent:</h3>
+    <h3 class="def-text" th:unless="${sent} and ${sent.size()}">There are no sent shipments!</h3>
+    <table th:if="${sent.size()>0}" class="table-template">
         <th>name</th>
         <th>weight</th>
         <th>price</th>
         <th>deliveryAddress</th>
         <th>sender</th>
         <th>recipient</th>
+        <th>sent Date</th>
         <th>Edit</th>
         <th>Delete</th>
-        <tr th:each="shipment : ${shipments}">
-            <td th:text="${shipment.name}"></td>
-            <td th:text="${shipment.weight}"></td>
-            <td th:text="${shipment.price}"></td>
-            <td th:text="${shipment.deliveryAddress}"></td>
-            <td th:text="${shipment.sender.username}"></td>
-            <td th:text="${shipment.recipient}"></td>
-            <td><a class="btn btn-info" th:href="@{'/shipment/edit-shipment/'+${shipment.id}}">Edit</a></td>
-            <td><a class="btn btn-danger" th:href="@{'/shipment/delete/'+${shipment.id}}">Delete</a></td>
+        <th th:if="${isAdmin}">Complete</th>
+        <tr th:each="send : ${sent}">
+            <td th:text="${send.name}"></td>
+            <td th:text="${send.weight}"></td>
+            <td th:text="${send.price}"></td>
+            <td th:text="${send.deliveryAddress}"></td>
+            <td th:text="${send.sender.username}"></td>
+            <td th:text="${send.recipient}"></td>
+            <td th:text="${send.shipmentDateTime}"></td>
+            <td><a class="btn btn-info" th:href="@{'/shipment/edit-shipment/'+${send.id}}">Edit</a></td>
+            <td><a class="btn btn-danger" th:href="@{'/shipment/delete/'+${send.id}}">Delete</a></td>
+            <td th:if="${isAdmin}">
+                <a class="btn btn-danger" th:href="@{'/shipment/receive-shipment/' + ${send.id}}">Complete Shipment</a>
+            </td>
+        </tr>
+    </table>
+
+    <h3 class="def-text">Received:</h3>
+    <h3 class="def-text" th:unless="${received} and ${received.size()}">There are no received shipments!</h3>
+    <table th:if="${received.size()>0}" class="table-template">
+        <th>name</th>
+        <th>weight</th>
+        <th>price</th>
+        <th>deliveryAddress</th>
+        <th>sender</th>
+        <th>recipient</th>
+        <th>sent Date</th>
+        <th>receive Date</th>
+        <th>Delete</th>
+        <tr th:each="rec : ${received}">
+            <td th:text="${rec.name}"></td>
+            <td th:text="${rec.weight}"></td>
+            <td th:text="${rec.price}"></td>
+            <td th:text="${rec.deliveryAddress}"></td>
+            <td th:text="${rec.sender.username}"></td>
+            <td th:text="${rec.recipient}"></td>
+            <td th:text="${rec.shipmentDateTime}"></td>
+            <td th:text="${rec.receiveDateTime}"></td>
+            <td><a class="btn btn-danger" th:href="@{'/shipment/delete/'+${rec.id}}">Delete</a></td>
         </tr>
     </table>
 </div>

@@ -4,10 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -26,15 +23,15 @@ public class Office extends BaseEntity {
     private String location;
 
     @Min(value = 0, message = "Minimum value is 0")
-    @Max(value = 100000, message = "You corrupt pig, just make him buy a new car")
-    private Double revenue;
+    @Max(value = 100000, message = "Too big for us")
+    private Double revenue = 0.0;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "office")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "office", cascade = CascadeType.ALL)
     private List<Employee> employees;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "office")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "office", cascade = CascadeType.ALL)
     private List<Shipment> shipments;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "office")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "office", cascade = CascadeType.ALL)
     private List<Client> clients;
 }

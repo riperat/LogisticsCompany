@@ -22,7 +22,7 @@ public class CreateOfficeViewModel {
 
     @NotBlank
     private String location;
-    private Double revenue = 0.0;
+    private Double revenue;
     private Set<Employee> employees;
     private Set<Shipment> shipments;
     private Set<Client> clients;

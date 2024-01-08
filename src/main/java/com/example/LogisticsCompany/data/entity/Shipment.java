@@ -9,6 +9,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Getter
@@ -32,6 +33,10 @@ public class Shipment extends BaseEntity {
     private boolean isReceived;
 
     private boolean isSend;
+
+    private LocalDateTime shipmentDateTime;
+
+    private LocalDateTime receiveDateTime;
 
     @NotBlank
     private String recipient;

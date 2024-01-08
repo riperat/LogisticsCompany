@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 
@@ -23,4 +24,6 @@ public class UpdateShipmentDTO {
     private boolean isSend;
     private String recipient;
     private User sender;
+    private LocalDateTime shipmentDateTime;
+    private LocalDateTime receiveDateTime;
 }

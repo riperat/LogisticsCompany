@@ -50,7 +50,7 @@ public class OfficeController {
         if (bindingResult.hasErrors()) {
             return "/office/create-office";
         }
-
+        office.setRevenue(0.0);
         officeService.createOffice(modelMapper.map(office, CreateOfficeDTO.class));
         return "redirect:/office";
     }

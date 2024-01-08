@@ -1,7 +1,5 @@
 package com.example.LogisticsCompany.services.implementations;
 
-import com.example.LogisticsCompany.data.entity.Client;
-import com.example.LogisticsCompany.data.entity.Employee;
 import com.example.LogisticsCompany.data.entity.Shipment;
 import com.example.LogisticsCompany.data.entity.User;
 import com.example.LogisticsCompany.data.repository.ShipmentRepository;
@@ -53,4 +51,5 @@ public class ShipmentServiceImpl implements ShipmentService {
     public List<Shipment> findAllSentBySender(User sender) {
         return shipmentRepository.findAllSentBySender(sender);
     }
+
 }

@@ -2,8 +2,10 @@ package com.example.LogisticsCompany.web.view.controllers;
 
 
 import com.example.LogisticsCompany.data.entity.User;
+import com.example.LogisticsCompany.data.repository.RoleRepository;
 import com.example.LogisticsCompany.services.interfaces.UserService;
 import com.example.LogisticsCompany.web.dto.UserDto;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +17,13 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/")
+@AllArgsConstructor
 public class IndexController {
 
     @Autowired
     private UserService userService;
+
+    private RoleRepository roleRepository;
 
     // handler method to handle login request
     @GetMapping("/login")
@@ -50,8 +55,7 @@ public class IndexController {
             model.addAttribute("user", userDto);
             return "/register";
         }
-
-        userService.saveUser(userDto);
+        userService.saveUser(userDto, roleRepository.findByAuthority("USER"));
         return "redirect:/register?success";
     }
 
@@ -61,6 +65,12 @@ public class IndexController {
         List<UserDto> users = userService.findAllUsers();
         model.addAttribute("users", users);
         return "users";
+    }
+
+    @GetMapping("/delete/{name}")
+    public String processProgramForm(@PathVariable String name) {
+        userService.deleteUser(userService.findUserByUsername(name).getId());
+        return "redirect:/employee";
     }
 
     @GetMapping("unauthorized")

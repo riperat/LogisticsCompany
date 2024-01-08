@@ -9,15 +9,17 @@
         <div class="form-group">
             <div class="form-group">
                 <label>Name: </label>
-                <input class="form-control" type="text" th:field="*{name}" placeholder="Name" id="Name">
-                <span class="text-danger" th:if="${#fields.hasErrors('name')}"
-                      th:errors="*{name}">Cannot be left blank</span>
+                <input class="form-control" type="text" th:field="*{username}" placeholder="Enter username" id="username">
+                <span class="text-danger" th:if="${#fields.hasErrors('username')}"
+                      th:errors="*{username}">Cannot be left blank</span>
             </div>
-
-            <div th:each="option, index : ${qualifications}">
-                <label>Select office:</label>
-                <input type="checkbox" th:value="${option}" name="qualifications" th:text="${option}" />
+            <div class="form-group">
+                <label>Password: </label>
+                <input class="form-control" type="text" th:field="*{password}" placeholder="Password" id="Password">
+                <span class="text-danger" th:if="${#fields.hasErrors('password')}"
+                      th:errors="*{password}">Cannot be left blank</span>
             </div>
+            <input type="hidden" th:name="id" th:value="${id}" />
         </div>
         <button type="submit" class="button">Submit</button>
     </form>

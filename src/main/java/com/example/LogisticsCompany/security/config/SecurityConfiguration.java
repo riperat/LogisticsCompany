@@ -46,7 +46,8 @@ public class SecurityConfiguration {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/shops/create-carShop", "/shops/adminShop-view", "/repairmen/**").hasAnyAuthority("ADMIN")
+                .antMatchers("/employee/**").hasAnyAuthority("EMPL")
+                .antMatchers("/employee/**").hasAnyAuthority("ADMIN")
                 .antMatchers("/shipment/*", "/office/*", "/register/**").permitAll()
                 .anyRequest().authenticated()
                 .and()

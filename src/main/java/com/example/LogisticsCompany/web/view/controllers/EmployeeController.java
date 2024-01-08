@@ -2,6 +2,7 @@ package com.example.LogisticsCompany.web.view.controllers;
 
 import com.example.LogisticsCompany.data.entity.Employee;
 import com.example.LogisticsCompany.data.entity.User;
+import com.example.LogisticsCompany.data.repository.RoleRepository;
 import com.example.LogisticsCompany.services.interfaces.EmployeeService;
 import com.example.LogisticsCompany.services.interfaces.OfficeService;
 import com.example.LogisticsCompany.services.interfaces.UserService;
@@ -35,6 +36,8 @@ public class EmployeeController {
 
     private OfficeService officeService;
 
+    private RoleRepository roleRepository;
+
     @GetMapping
     public String getEmployees(Model model) {
         //gets a list of employees either by user or all if the user is != client
@@ -42,22 +45,22 @@ public class EmployeeController {
                 .map(Employee::getName)
                 .collect(Collectors.toList());
 
-        model.addAttribute("employees", employees);
 
         final List<String> users = userService.findAllUsers().stream()
                 .map(UserDto::getUsername)
                 .collect(Collectors.toList());
 
         users.removeAll(employees);
+        users.removeIf(s -> s.equals("admin"));
 
+        model.addAttribute("employees", employees);
         model.addAttribute("users", users);
         return "/employee/employee.html";
     }
 
     @GetMapping("/create-employee/{id}")
     public String showCreateEmployeeForm(Model model, @PathVariable Long id) {
-        UserDto user = new UserDto();
-        model.addAttribute("employees", user);
+        model.addAttribute("employees", new UserDto());
         model.addAttribute("id", id);
         return "/employee/create-employee";
     }
@@ -80,7 +83,7 @@ public class EmployeeController {
         employee.setName(userDto.getUsername());
         employee.setOffice(officeService.getOfficeById(id));
 
-        User user = userService.savedUser(userDto);
+        User user = userService.savedUser(userDto, roleRepository.findByAuthority("EMPL"));
         employee.setUser(user);
 
         employeeService.createEmployee(modelMapper.map(employee, CreateEmployeeDTO.class));

@@ -7,6 +7,18 @@
     color: white;
 }
 
+.table-template a {
+    text-decoration: none;
+    color: #000000;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.table-template a:hover {
+    color: #a0a0c4; /* Darker green on hover */
+
+}
+
 .table-template button {
     background-color: #d2902a;
     color: #ffffff;

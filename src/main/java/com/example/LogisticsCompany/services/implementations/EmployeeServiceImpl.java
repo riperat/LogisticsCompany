@@ -52,4 +52,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.getAllEmployeesByOffice(office);
     }
 
+    @Override
+    public Employee getEmployeeByName(String name) {
+        return employeeRepository.getEmployeeByName(name);
+    }
+
 }
