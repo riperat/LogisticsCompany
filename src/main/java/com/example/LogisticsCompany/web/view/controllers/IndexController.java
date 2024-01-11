@@ -1,6 +1,5 @@
 package com.example.LogisticsCompany.web.view.controllers;
 
-
 import com.example.LogisticsCompany.data.entity.User;
 import com.example.LogisticsCompany.data.repository.RoleRepository;
 import com.example.LogisticsCompany.services.interfaces.UserService;
@@ -15,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * Controller class for handling User-related operations.
+ */
 @Controller
 @RequestMapping("/")
 @AllArgsConstructor
@@ -25,13 +27,22 @@ public class IndexController {
 
     private RoleRepository roleRepository;
 
-    // handler method to handle login request
+    /**
+     * Handles GET request for login page.
+     *
+     * @return the view for the login page
+     */
     @GetMapping("/login")
     public String login() {
         return "login";
     }
 
-    // handler method to handle user registration form request
+    /**
+     * Handles GET request to show user registration form.
+     *
+     * @param model the model to add attributes to
+     * @return the view for the user registration form
+     */
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         // create model object to store form data
@@ -40,7 +51,14 @@ public class IndexController {
         return "register";
     }
 
-    // handler method to handle user registration form submit request
+    /**
+     * Handles POST request to submit user registration form.
+     *
+     * @param userDto the DTO containing user information
+     * @param result  the result of the validation
+     * @param model   the model to add attributes to
+     * @return the redirect path after user registration
+     */
     @PostMapping("/register/save")
     public String registration(@Valid @ModelAttribute("user") UserDto userDto,
                                BindingResult result,
@@ -59,7 +77,12 @@ public class IndexController {
         return "redirect:/register?success";
     }
 
-    // handler method to handle list of users
+    /**
+     * Handles GET request to retrieve a list of users.
+     *
+     * @param model the model to add attributes to
+     * @return the view for displaying the list of users
+     */
     @GetMapping("/users")
     public String users(Model model) {
         List<UserDto> users = userService.findAllUsers();
@@ -67,12 +90,24 @@ public class IndexController {
         return "users";
     }
 
+    /**
+     * Handles GET request to delete a user.
+     *
+     * @param name the username of the user being deleted
+     * @return the redirect path after deleting the user
+     */
     @GetMapping("/delete/{name}")
     public String processProgramForm(@PathVariable String name) {
         userService.deleteUser(userService.findUserByUsername(name).getId());
         return "redirect:/employee";
     }
 
+    /**
+     * Handles GET request for unauthorized access.
+     *
+     * @param model the model to add attributes to
+     * @return the view for unauthorized access
+     */
     @GetMapping("unauthorized")
     public String unauthorized(Model model) {
         return "unauthorized";

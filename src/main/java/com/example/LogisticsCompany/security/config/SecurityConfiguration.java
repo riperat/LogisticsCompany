@@ -14,7 +14,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-//TODO Finish and fix this class
+/**
+ * Class that handles security and permissions for users.
+ */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(

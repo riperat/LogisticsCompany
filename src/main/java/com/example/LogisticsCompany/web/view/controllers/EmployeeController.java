@@ -21,7 +21,9 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+/**
+ * Controller class for handling employee-related operations.
+ */
 @Controller
 @AllArgsConstructor
 @RequestMapping("/employee")
@@ -38,13 +40,18 @@ public class EmployeeController {
 
     private RoleRepository roleRepository;
 
+    /**
+     * Handles GET request to retrieve the list of employees.
+     *
+     * @param model the model to add attributes to
+     * @return the view for displaying the list of employees
+     */
     @GetMapping
     public String getEmployees(Model model) {
-        //gets a list of employees either by user or all if the user is != client
+        // gets a list of employees either by user or all if the user is != client
         final List<String> employees = employeeService.getEmployees().stream()
                 .map(Employee::getName)
                 .collect(Collectors.toList());
-
 
         final List<String> users = userService.findAllUsers().stream()
                 .map(UserDto::getUsername)
@@ -58,6 +65,13 @@ public class EmployeeController {
         return "/employee/employee.html";
     }
 
+    /**
+     * Handles GET request to show the form for creating a new employee.
+     *
+     * @param model the model to add attributes to
+     * @param id    the ID of the office for which the employee is being created
+     * @return the view for creating a new employee
+     */
     @GetMapping("/create-employee/{id}")
     public String showCreateEmployeeForm(Model model, @PathVariable Long id) {
         model.addAttribute("employees", new UserDto());
@@ -65,6 +79,15 @@ public class EmployeeController {
         return "/employee/create-employee";
     }
 
+    /**
+     * Handles POST request to create a new employee.
+     *
+     * @param userDto       the DTO containing user information
+     * @param bindingResult the result of the validation
+     * @param model         the model to add attributes to
+     * @param id            the ID of the office for which the employee is being created
+     * @return the redirect path after creating the employee
+     */
     @PostMapping("/create")
     public String createEmployee(@Valid @ModelAttribute("user") UserDto userDto, BindingResult bindingResult, Model model, @RequestParam("id") Long id) {
         User existingUser = userService.findUserByUsername(userDto.getUsername());
@@ -90,12 +113,27 @@ public class EmployeeController {
         return "redirect:/office";
     }
 
+    /**
+     * Handles GET request to show the form for editing an employee.
+     *
+     * @param model the model to add attributes to
+     * @param id    the ID of the employee being edited
+     * @return the view for editing an employee
+     */
     @GetMapping("/edit-employee/{id}")
     public String showEditEmployeeForm(Model model, @PathVariable Long id) {
         model.addAttribute("employee", employeeService.getEmployeeById(id));
         return "/employee/edit-employee";
     }
 
+    /**
+     * Handles POST request to update an employee.
+     *
+     * @param id            the ID of the employee being updated
+     * @param employee      the updated employee information
+     * @param bindingResult the result of the validation
+     * @return the redirect path after updating the employee
+     */
     @PostMapping("/update/{id}")
     public String updateEmployee(@PathVariable long id, @Valid @ModelAttribute("employee") UpdateEmployeeViewModel employee, BindingResult bindingResult) {
 
@@ -108,6 +146,12 @@ public class EmployeeController {
         return "redirect:/office";
     }
 
+    /**
+     * Handles GET request to delete an employee.
+     *
+     * @param id the ID of the employee being deleted
+     * @return the redirect path after deleting the employee
+     */
     @GetMapping("/delete/{id}")
     public String processProgramForm(@PathVariable int id) {
         employeeService.deleteEmployee(id);

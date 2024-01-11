@@ -26,7 +26,9 @@ import java.util.stream.Collectors;
 import static com.example.LogisticsCompany.util.DTOConverter.convertOfficeToDTOForUpdate;
 import static com.example.LogisticsCompany.util.DTOConverter.convertShipmentToDTOForUpdate;
 
-
+/**
+ * Controller class for handling shipment-related operations.
+ */
 @Controller
 @AllArgsConstructor
 @RequestMapping("/shipment")
@@ -38,9 +40,16 @@ public class ShipmentController {
 
     private OfficeService officeService;
 
+    /**
+     * Handles GET request to retrieve the list of shipments.
+     *
+     * @param model the model to add attributes to
+     * @param user  the authenticated user
+     * @return the view for displaying the list of shipments
+     */
     @GetMapping
     public String getShipments(Model model, @AuthenticationPrincipal User user) {
-        //gets a list of shipments either by user or all if the user is != client
+        // gets a list of shipments either by user or all if the user is != client
         final List<Shipment> shipments = user.getAuthorities().iterator().next().getAuthority().equals("USER") ?
                 shipmentService.findAllSentBySender(user) : shipmentService.getAllShipments();
         model.addAttribute("isAdmin", !user.getAuthorities().iterator().next().getAuthority().equals("USER"));
@@ -58,6 +67,13 @@ public class ShipmentController {
         return "/shipment/shipment.html";
     }
 
+    /**
+     * Handles GET request to show the form for creating a new shipment.
+     *
+     * @param model the model to add attributes to
+     * @param id    the ID of the office for which the shipment is being created
+     * @return the view for creating a new shipment
+     */
     @GetMapping("/create-shipment/{id}")
     public String showCreateShipmentForm(Model model, @PathVariable Long id) {
         model.addAttribute("shipments", new CreateShipmentViewModel());
@@ -65,6 +81,15 @@ public class ShipmentController {
         return "/shipment/create-shipment";
     }
 
+    /**
+     * Handles POST request to create a new shipment.
+     *
+     * @param shipment       the shipment information to be created
+     * @param bindingResult  the result of the validation
+     * @param user           the authenticated user
+     * @param id             the ID of the office for which the shipment is being created
+     * @return the redirect path after creating the shipment
+     */
     @PostMapping("/create")
     public String createShipment(@Valid @ModelAttribute("shipments") CreateShipmentViewModel shipment, BindingResult bindingResult, @AuthenticationPrincipal User user, @RequestParam("id") Long id) {
 
@@ -81,14 +106,28 @@ public class ShipmentController {
         return "redirect:/shipment";
     }
 
+    /**
+     * Handles GET request to show the form for editing a shipment.
+     *
+     * @param model the model to add attributes to
+     * @param id    the ID of the shipment being edited
+     * @return the view for editing a shipment
+     */
     @GetMapping("/edit-shipment/{id}")
     public String showEditShipmentForm(Model model, @PathVariable Long id) {
         model.addAttribute("shipment", shipmentService.getShipmentById(id));
         return "/shipment/edit-shipment";
     }
 
+    /**
+     * Handles GET request to mark a shipment as received.
+     *
+     * @param model the model to add attributes to
+     * @param id    the ID of the shipment being marked as received
+     * @return the redirect path after marking the shipment as received
+     */
     @GetMapping("/receive-shipment/{id}")
-    public String showReveiveShipmentForm(Model model, @PathVariable Long id) {
+    public String showReceiveShipmentForm(Model model, @PathVariable Long id) {
         Shipment shipment = shipmentService.getShipmentById(id);
         shipment.setSend(false);
         shipment.setReceived(true);
@@ -104,7 +143,15 @@ public class ShipmentController {
         return "redirect:/shipment";
     }
 
-
+    /**
+     * Handles POST request to update a shipment.
+     *
+     * @param id             the ID of the shipment being updated
+     * @param user           the authenticated user
+     * @param shipment       the updated shipment information
+     * @param bindingResult  the result of the validation
+     * @return the redirect path after updating the shipment
+     */
     @PostMapping("/update/{id}")
     public String updateShipment(@PathVariable long id, @AuthenticationPrincipal User user, @Valid @ModelAttribute("shipment") UpdateShipmentViewModel shipment, BindingResult bindingResult) {
 
@@ -118,6 +165,13 @@ public class ShipmentController {
         return "redirect:/shipment";
     }
 
+
+    /**
+     * Handles GET request to delete an shipment
+     *
+     * @param id the ID of the shipment being deleted
+     * @return the redirect path after deleting the office
+     */
     @GetMapping("/delete/{id}")
     public String processProgramForm(@PathVariable int id) {
         shipmentService.deleteShipment(id);
