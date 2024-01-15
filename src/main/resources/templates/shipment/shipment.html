@@ -3,6 +3,20 @@
 <head th:replace="fragments :: head">
 <body class="standart">
 <header th:replace="fragments :: header"></header>
+<div>
+    <form th:action="@{/shipment}" method="get">
+        <input type="text" name="search" placeholder="Search">
+        <select name="searchFields">
+            <option value="name">Name</option>
+            <option value="deliveryAddress">Delivery Address</option>
+            <option value="sender">Sender</option>
+            <option value="recipient">Recipient</option>
+            <option value="sendDate">Send Date</option>
+        </select>
+        <button type="submit">Search</button>
+    </form>
+</div>
+
 <h2 class="def-text">My shipments:</h2>
 <div class="col-6">
     <h3 class="def-text">Sent:</h3>

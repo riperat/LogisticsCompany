@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 
 import static com.example.LogisticsCompany.util.DTOConverter.convertOfficeToDTOForUpdate;
 import static com.example.LogisticsCompany.util.DTOConverter.convertShipmentToDTOForUpdate;
+import static com.example.LogisticsCompany.util.HibernateUtil.getFieldAsString;
 
 /**
  * Controller class for handling shipment-related operations.
@@ -48,22 +49,30 @@ public class ShipmentController {
      * @return the view for displaying the list of shipments
      */
     @GetMapping
-    public String getShipments(Model model, @AuthenticationPrincipal User user) {
-        // gets a list of shipments either by user or all if the user is != client
-        final List<Shipment> shipments = user.getAuthorities().iterator().next().getAuthority().equals("USER") ?
+    public String getShipments(
+            Model model,
+            @AuthenticationPrincipal User user,
+            @RequestParam(name = "search", required = false) String searchTerm,
+            @RequestParam(name = "searchFields", required = false) List<String> searchFields
+    ) {
+        List<Shipment> shipments = user.getAuthorities().iterator().next().getAuthority().equals("USER") ?
                 shipmentService.findAllSentBySender(user) : shipmentService.getAllShipments();
+
+        if (searchTerm != null && !searchTerm.isEmpty() && searchFields != null && !searchFields.isEmpty()) {
+            shipments = shipments.stream()
+                    .filter(shipment -> {
+                        String searchTermLowerCase = searchTerm.toLowerCase();
+                        return searchFields.stream().anyMatch(field -> {
+                            String fieldValue = getFieldAsString(shipment, field);
+                            return fieldValue != null && fieldValue.toLowerCase().contains(searchTermLowerCase);
+                        });
+                    })
+                    .collect(Collectors.toList());
+        }
+
         model.addAttribute("isAdmin", !user.getAuthorities().iterator().next().getAuthority().equals("USER"));
-
-        List<Shipment> sent = shipments.stream()
-                .filter(Shipment::isSend)
-                .collect(Collectors.toList());
-
-        List<Shipment> received = shipments.stream()
-                .filter(Shipment::isReceived)
-                .collect(Collectors.toList());
-
-        model.addAttribute("sent", sent);
-        model.addAttribute("received", received);
+        model.addAttribute("sent", shipments.stream().filter(Shipment::isSend).collect(Collectors.toList()));
+        model.addAttribute("received", shipments.stream().filter(Shipment::isReceived).collect(Collectors.toList()));
         return "/shipment/shipment.html";
     }
 
@@ -84,10 +93,10 @@ public class ShipmentController {
     /**
      * Handles POST request to create a new shipment.
      *
-     * @param shipment       the shipment information to be created
-     * @param bindingResult  the result of the validation
-     * @param user           the authenticated user
-     * @param id             the ID of the office for which the shipment is being created
+     * @param shipment      the shipment information to be created
+     * @param bindingResult the result of the validation
+     * @param user          the authenticated user
+     * @param id            the ID of the office for which the shipment is being created
      * @return the redirect path after creating the shipment
      */
     @PostMapping("/create")
@@ -146,10 +155,10 @@ public class ShipmentController {
     /**
      * Handles POST request to update a shipment.
      *
-     * @param id             the ID of the shipment being updated
-     * @param user           the authenticated user
-     * @param shipment       the updated shipment information
-     * @param bindingResult  the result of the validation
+     * @param id            the ID of the shipment being updated
+     * @param user          the authenticated user
+     * @param shipment      the updated shipment information
+     * @param bindingResult the result of the validation
      * @return the redirect path after updating the shipment
      */
     @PostMapping("/update/{id}")

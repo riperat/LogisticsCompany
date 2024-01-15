@@ -1,6 +1,22 @@
 .standart {
     font-family: "Lato", sans-serif;
     background-color: #262626;
+    font-size: 16px; /* Default font size */
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 600px) {
+    .standart {
+        font-size: 14px; /* Adjusted font size for smaller screens */
+    }
+
+    .table-template th, .table-template td {
+        font-size: 1em;
+    }
+
+    .table-template button {
+        margin: 5px 10px; /* Adjusted margin for smaller screens */
+    }
 }
 
 .def-text {
